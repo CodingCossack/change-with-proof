@@ -1,0 +1,7 @@
+interface:
+  display_name: "Agent Systems"
+  short_description: "Risk-aware software engineering workflows"
+  default_prompt: "Use $agent-systems to implement this software change with proof at the relevant risk boundaries."
+
+policy:
+  allow_implicit_invocation: true

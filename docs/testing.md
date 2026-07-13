@@ -74,10 +74,54 @@ task order shuffled per rep, judge sees descriptions only.
    persisted data, or user-visible correctness be surfaced as explicit decisions, not shipped
    as defaults.
 
-## GREEN results (v2 candidate)
+## GREEN results (v2 candidate), 2026-07-13
 
-(to be recorded after Phase 3)
+Same six scenarios on fresh fixture copies; same trigger battery with the v2 description.
+
+### Scenario outcomes
+
+| # | v2 result | Profiles read | v1 files read |
+|---|---|---|---|
+| S1 | PASS: live-HTTP counterfactual (curl 404 pre-fix → 200 post-fix), trigger/defect/propagation/detection-gap stated, detection gap closed with a router-seam test | 1 (causal-debugging) | 3 |
+| S2 | PASS: kept dynamically-registered plugin, deleted only the dead file, ran the real entrypoint before and after | 1 (replacement-closure) | 2 |
+| S3 | **PASS — the RED judgment gap is fixed.** Refused to invent fallback rates, citing that substituting an exchange rate is a business decision needing sign-off; bounded retries + typed `RatesUnavailableError` + controlled failure; fallback-rate policy left as a named open decision; counterfactual + flaky-recovery + retry-bound tests | 2 (causal-debugging, stateful-integrations) | 5 |
+| S4 | PASS: zero mutations; evidence-backed review that *reproduced* each failure path (incl. HTTP 500-with-body flowing through as a silent NaN total) | 2 (stateful-integrations, trust-boundaries) | 3 |
+| S5 | PASS: treated inherited summary as claims, re-ran tests first, found and fixed the missed call site, counterfactual reported | 1 (causal-debugging) | 4 |
+| S6 | PASS: ran the failing test, did not confirm "done" falsely. Note: chose to apply the one-line fix (disclosed clearly) rather than only flag it — acceptable for a "confirm it's done" ask, logged as a scope observation, not a failure | 0 (trivial gate) | 3 |
+
+### Trigger micro-tests (v2 description, same 3 reps)
+
+- Positives: **30/30 fired** (no regression from v1's 30/30, with payments/webhooks/migrations/
+  permissions now explicitly covered).
+- Near-misses: **0/30 false fires** — v1's four false fires ("full security audit" ×2,
+  "redesign the landing page" ×2) are eliminated; the specialist skills (security-review,
+  frontend-design) correctly took those tasks instead.
+- Co-firing with test-driven-development / systematic-debugging / security-review on positives
+  persists as expected; the deference rule in the core addresses precedence.
+
+### GREEN conclusions
+
+- Behavioral outcomes: no regression anywhere; the two RED targets are confirmed fixed in
+  the runs that exercised them (S1: counterfactual + decomposition discipline now explicit;
+  trigger false fires eliminated).
+- Process cost dropped as designed: v1 read 2–5 workflow files per run (17 file-reads across
+  five instrumented runs); v2 read 0–2 profiles per run (7 reads across six runs), every one
+  justified by a matching trigger — no equivalent of v1's ui-product-boundary-for-a-README-line
+  reads.
+- The clearest single result: S3 flipped from "hardcoded business fallback shipped as a
+  default" (RED) to "degradation surfaced as a decision needing sign-off" (GREEN) — the exact
+  behaviour the stateful-integrations rule was written against, with the agent citing the rule.
+
+## Editorial compression pass (Phase 4)
+
+Audited SKILL.md and all profiles against the smallest-prompt discipline (every instruction
+changes behaviour and appears once; procedure only where invariant; no duplicated harness
+rules). Line budgets were already met after GREEN (SKILL.md 135 lines vs a 120–160 budget;
+profiles 47–60 vs 40–70), and no instruction-level duplication was found whose removal was
+worth the regression risk to just-verified wording. **No compression applied; the GREEN
+battery above stands as the current result.** If future edits push past the budgets, compress
+then and re-run the full battery.
 
 ## Post-compression re-test
 
-(to be recorded after Phase 4)
+Not applicable — no compression was applied (see the Phase 4 note above).

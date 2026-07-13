@@ -1,14 +1,20 @@
 # Contributing
 
-Open an issue before changing the routing model or proof philosophy. Small corrections can go directly to a pull request.
+Small corrections (typos, broken links, formatting) can go directly to a pull request.
 
-Contributions must:
+A material change to instructions, triggers, or profiles must:
 
-- remain agent-agnostic and compatible with repository-specific instructions;
-- preserve progressive disclosure through the router, workflows, and references;
-- define positive target behaviour rather than generic prohibitions;
-- connect new rules to an observable risk, contract, or proof seam;
-- keep the hygiene scanner advisory and avoid false claims of proof;
-- pass `./scripts/validate.sh`.
+1. name the failure mode it addresses — what an agent does wrong without it;
+2. add or update a scenario or trigger case in `docs/testing.md` that distinguishes the
+   proposed behaviour from the current baseline (RED/GREEN);
+3. pass `./scripts/validate.sh`.
 
-Do not add repository-specific policies, private paths, planning artefacts, model-specific tool names, or broad process rules without a demonstrated failure mode.
+Keep contributions:
+
+- agent-agnostic: no harness-specific tool names, repository-specific policies, or private
+  paths;
+- single-sourced: control-loop rules live in `SKILL.md` once; profiles add only obligations
+  for their risk class and follow the fixed section contract (Trigger / Additional
+  obligations / Characteristic failure modes / Minimum evidence / Exit criteria);
+- positive: define target behaviour connected to an observable risk, contract, or proof seam
+  rather than generic prohibitions.

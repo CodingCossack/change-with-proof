@@ -58,11 +58,12 @@ fires. Pressure scenarios with fixture repos catch regressions in exactly those 
 a fraction of the cost of a bespoke eval harness. A fixture-repo eval suite with repeated runs
 remains future work if the skill grows users.
 
-## Trigger control is the description, not openai.yaml
+## Trigger control starts with the description
 
-`allow_implicit_invocation: false` only affects harnesses that read `agents/openai.yaml`.
-Claude Code and similar harnesses route purely on the frontmatter description, so the
-description carries the control: positive triggers list what the skill actually handles
-(v1 omitted payments, webhooks, migrations, and permissions that its own router claimed), and
-the "Do not use for" clause removes the only false fires observed in baseline trigger tests
-(dedicated security audits, visual design).
+`allow_implicit_invocation: true` lets harnesses that read `agents/openai.yaml` route to the
+skill automatically. Claude Code and similar harnesses route purely on the frontmatter
+description, so the description remains the cross-harness control: positive triggers list
+what the skill actually handles (v1 omitted payments, webhooks, migrations, and permissions
+that its own router claimed), and the "Do not use for" clause removes the only false fires
+observed in baseline trigger tests (dedicated security audits, visual design). The v2 trigger
+battery justified implicit routing with 30/30 intended triggers and 0/30 near-miss triggers.

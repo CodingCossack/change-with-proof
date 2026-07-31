@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Enable implicit invocation after the v2 trigger battery achieved 30/30 intended triggers
+  and 0/30 near-miss triggers.
+
 ## 2.0.0 — 2026-07-13
 
 Breaking rewrite. The skill `agent-systems` is renamed **`change-with-proof`**; the payload

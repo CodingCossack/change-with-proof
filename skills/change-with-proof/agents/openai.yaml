@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $change-with-proof to complete this software change, preserve or intentionally update its contracts, and report evidence and gaps."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

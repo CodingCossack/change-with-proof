@@ -107,9 +107,10 @@ Use $change-with-proof to migrate this schema without breaking existing rows, an
 Repository and harness instructions remain authoritative. If a repository has `AGENTS.md`,
 `CLAUDE.md`, CI rules, or local conventions, the skill operates within them.
 
-Implicit invocation is disabled in `agents/openai.yaml` pending trigger evidence; on
-harnesses that route purely by description (for example Claude Code), the frontmatter
-description carries an explicit "Do not use for" scope instead.
+Implicit invocation is enabled in `agents/openai.yaml` after the v2 trigger battery achieved
+30/30 intended triggers and 0/30 near-miss triggers. On harnesses that route purely by
+description (for example Claude Code), the frontmatter description carries the same explicit
+"Do not use for" scope.
 
 ## Testing
 

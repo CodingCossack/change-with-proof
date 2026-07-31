@@ -44,8 +44,8 @@ python3 scripts/check_skill.py || fail "check_skill.py reported errors"
 
 grep -Fq '$change-with-proof' skills/change-with-proof/agents/openai.yaml \
   || fail 'openai.yaml must reference $change-with-proof'
-grep -Fq 'allow_implicit_invocation: false' skills/change-with-proof/agents/openai.yaml \
-  || fail 'openai.yaml must keep implicit invocation disabled'
+grep -Fq 'allow_implicit_invocation: true' skills/change-with-proof/agents/openai.yaml \
+  || fail 'openai.yaml must enable implicit invocation'
 
 grep -Fq 'skills/change-with-proof' README.md \
   || fail 'README must document the skills/change-with-proof payload path'

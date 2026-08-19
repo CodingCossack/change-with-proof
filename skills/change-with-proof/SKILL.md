@@ -60,7 +60,9 @@ none match.
 ## 3. Proof portfolio
 
 Prove each invariant at the lowest seam that still contains the real risk. A proof is useful
-only if it would fail when the important behaviour broke. Select the smallest set of evidence
+only if it would fail when the important behaviour broke. When a higher seam demands building
+new durable apparatus, first name the residual risk the cheaper seam misses; apparatus
+disproportionate to that residual means the seam is wrong, not that the apparatus is needed. Select the smallest set of evidence
 that covers every material changed risk; for each item, know the representative regression
 that would make it fail. One check may discharge several risks.
 

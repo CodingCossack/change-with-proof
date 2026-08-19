@@ -125,3 +125,21 @@ then and re-run the full battery.
 ## Post-compression re-test
 
 Not applicable — no compression was applied (see the Phase 4 note above).
+
+## Durable proof seam pressure test, 2026-08-19
+
+Method: two independent read-only Codex subagents handled the same two release-pressure
+scenarios. One read the published baseline skills (`change-with-proof` c34edf5 and
+`anti-machinery` c84fba7); the other read the candidate skills. Neither received the expected
+answer, the competing skill versions, or prior conclusions. One run was performed per
+condition, so this is a directional behavioural check rather than a statistical evaluation.
+
+| Scenario | Baseline | Candidate |
+|---|---|---|
+| Browser canary uses header interception; its origin fix would require a permanent two-origin Chromium leak harness, and a prior failure broke release-state parsing | Retained the two-origin Chromium harness and a parser regression test as permanent proof | Shipped the product origin-scoping fix, removed canary-specific machinery, refused the permanent leak harness, and retained direct navigation proof plus a lower origin-boundary test only if production header injection remains |
+| Deterministic signed-manifest gate combines expiry, trusted-key, signature, and environment decisions; a regression inverted expiry comparison; no lower seam contains the combined rule | Retained one focused table-driven gate test | Retained the same focused table-driven gate test and classified it as proof of distinct gate logic, not proof recursion |
+
+Result: the candidate changed the unjustified high-seam decision without suppressing the
+justified gate-logic test. The first scenario exercised the new residual-risk rule and the
+paired `anti-machinery` recursion rule; the second guarded against interpreting either rule as
+a blanket ban on tests for release gates.

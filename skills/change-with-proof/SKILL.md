@@ -63,11 +63,12 @@ Prove each invariant at the lowest seam that still contains the real risk. A pro
 only if it would fail when the important behaviour broke. When a higher seam demands new
 durable apparatus, first name the residual product risk the cheaper seam misses. Apparatus
 that exists only to prove the proof mechanism does not cover product risk; simplify or move
-the original proof instead. Test-only behaviour introduced by a harness — request
-interception, injected headers, synthetic routes, harness-specific parsers — remains proof-
-mechanism risk even when the harness is production-equivalent; its failures do not justify
-permanent regression apparatus. Apparatus disproportionate to the residual product risk
-likewise means the seam is wrong, not that the apparatus is needed. Select the smallest set of evidence
+the original proof instead. Test-only behaviour introduced solely to operate a disposable
+harness — request interception, injected headers, synthetic routes, harness bookkeeping —
+remains proof-mechanism risk even when the harness is production-equivalent; its failures do
+not justify permanent regression apparatus. A retained gate's distinct parsing or decision
+contract is release behaviour and may warrant focused proof. Apparatus disproportionate to
+the residual product risk likewise means the seam is wrong, not that the apparatus is needed. Select the smallest set of evidence
 that covers every material changed risk; for each item, know the representative regression
 that would make it fail. One check may discharge several risks.
 

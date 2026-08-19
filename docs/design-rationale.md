@@ -67,3 +67,45 @@ what the skill actually handles (v1 omitted payments, webhooks, migrations, and 
 that its own router claimed), and the "Do not use for" clause removes the only false fires
 observed in baseline trigger tests (dedicated security audits, visual design). The v2 trigger
 battery justified implicit routing with 30/30 intended triggers and 0/30 near-miss triggers.
+
+# Design rationale (v3)
+
+## Why the profiles were deleted
+
+The v2 RED baseline already recorded the honest finding: capable agents avoid most gross
+engineering failures with or without the skill, and the skill's measured marginal value was
+narrow — durable regression proof at the right seam with a fail-before/pass-after
+counterfactual, business-affecting degradations surfaced as decisions, inherited summaries
+re-verified, and claim scope matched to evidence scope. The v3 baseline (2026-08-19, run on
+gpt-5.6-sol, the skill's dominant real consumer per session-trace analysis) reconfirmed it:
+no-skill controls independently produced correct deletions in a machinery close-out scenario
+and refused to invent exchange rates under deadline pressure. The six profiles (~2,330 words
+of conditional payload) were domain checklists whose only rule with direct behavioural
+evidence — "degradation is a decision" — fits in one core sentence. Every rule retained in v3
+traces to an observed failure or a measured delta; everything else was removed as duplicated
+model competence. Trace analysis of ~1,900 Codex sessions found heavy genuine use of the
+core loop's vocabulary (counterfactual discipline in 452 sessions) and one confirmed
+decision-change citing a profile — whose operative content (the counterfactual gate) is
+retained in the v3 core.
+
+## Why "accidental behaviour is not a contract" is explicit
+
+In the v3 candidate battery, an agent running the draft skill fixed a typo route, then
+reversed itself during diff review: "repository evidence cannot tell us whether any external
+probe adapted to the already-deployed path. Removing it would create an unnecessary breaking
+change" — and shipped a permanent compatibility alias plus a test enshrining the typo. The
+no-skill control did not do this. The draft's contract rule ("decide preserve/change/retire;
+know the consumer") licensed speculative preservation; v2's strength taxonomy had blocked it
+via the "weak signal" class. v3 keeps the lighter contract rule but adds the explicit
+negation: an accident earns no compatibility shim on speculation, and a real consumer of an
+accident turns retention into a surfaced decision. Re-runs with this wording removed the
+typo cleanly (2/2), with the counterfactual discipline intact.
+
+## Why the description names concrete change types
+
+The activation contract keeps v2's measured 30/30 positive recall by listing the change
+classes that route real work (bugs, migrations, auth, payments, webhooks, persistence,
+removal, resumed work), leads the negative scope with the same exclusions that eliminated
+v2's false fires, and adds "visual design and restyling work, however large" — in the v3
+trigger battery, "redesign the landing page" false-fired 3/3 under both the v2 and the first
+v3 description and 0/3 once restyling was excluded by name.

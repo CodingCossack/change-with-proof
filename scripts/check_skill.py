@@ -2,8 +2,8 @@
 """Structural checks for the change-with-proof skill.
 
 Stdlib only. Parses frontmatter by scanning for delimiters (no line-position
-assumptions), verifies naming/description rules, resolves relative file
-references, and enforces the profile section contract.
+assumptions), verifies naming/description rules, and resolves relative file
+references.
 """
 
 import re
@@ -13,16 +13,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SKILL_DIR = REPO / "skills" / "change-with-proof"
 SKILL_MD = SKILL_DIR / "SKILL.md"
-PROFILES_DIR = SKILL_DIR / "profiles"
 
 MAX_FRONTMATTER_CHARS = 1024
-REQUIRED_PROFILE_HEADERS = [
-    "## Trigger",
-    "## Additional obligations",
-    "## Characteristic failure modes",
-    "## Minimum evidence",
-    "## Exit criteria",
-]
 # Bare filenames that refer to repo/harness conventions, not skill files.
 CONVENTION_FILES = {"AGENTS.md", "README.md", "CLAUDE.md", "GEMINI.md", "SKILL.md"}
 
@@ -87,25 +79,12 @@ def check_references(md_file: Path) -> None:
             err(f"{md_file.relative_to(REPO)}: reference {token!r} does not resolve to a file")
 
 
-def check_profiles() -> None:
-    profiles = sorted(PROFILES_DIR.glob("*.md"))
-    if not profiles:
-        err("profiles/ contains no profile files")
-    for profile in profiles:
-        text = profile.read_text(encoding="utf-8")
-        for header in REQUIRED_PROFILE_HEADERS:
-            if not re.search(rf"^{re.escape(header)}\s*$", text, re.MULTILINE):
-                err(f"{profile.relative_to(REPO)}: missing required section {header!r}")
-        check_references(profile)
-
-
 def main() -> int:
     if not SKILL_MD.is_file():
         print(f"FAIL: missing {SKILL_MD}", file=sys.stderr)
         return 1
     check_frontmatter()
     check_references(SKILL_MD)
-    check_profiles()
     if errors:
         for e in errors:
             print(f"FAIL: {e}", file=sys.stderr)

@@ -149,3 +149,62 @@ proof-mechanism risk; a fresh isolated agent then removed that machinery.
 Result: each candidate skill independently rejects the unjustified high-seam apparatus, and
 each independently preserves focused proof of a retained gate's distinct decision contract.
 The crossed conditions prevent attributing a paired result to the wrong skill.
+
+## v3 battery, 2026-08-19
+
+Method: `codex exec` on gpt-5.6-sol (the skill's dominant real consumer per trace analysis
+below), medium reasoning effort, fully isolated HOME/CODEX_HOME so no other skills were
+visible, one dependency-free git fixture repo per scenario, workspace-write sandbox. Skill
+conditions received the skill path with an instruction to read and apply it; activation was
+measured separately by the trigger battery. One run per condition unless noted — a
+directional gate, not a statistical eval.
+
+### Trigger battery (skill router judged from descriptions only, 3 reps × 26 tasks)
+
+Roster: change-with-proof + anti-machinery + five realistic competitors
+(systematic-debugging, security-review, frontend-design, test-driven-development,
+writing-gpt-5-6-prompts). Tasks: the ten v2 positives, ten near-misses, four
+anti-machinery positives, one boundary, one pure-Q&A negative.
+
+| Description | Positives (30) | Near-miss false fires (30) |
+|---|---|---|
+| v2 (current) | 30/30 | 3/30 — "redesign the landing page", all reps |
+| v3 draft | 30/30 | 3/30 — same task, all reps |
+| v3 final (adds "visual design and restyling work, however large") | 30/30 | 0/30 |
+
+### Behavioural scenarios
+
+| Scenario | No skill | v2 (current) | v3 candidate |
+|---|---|---|---|
+| Route-typo regression (`/helth`): fix + durable proof at the routing seam | Fixed; added a server-seam regression test; no counterfactual reported | Fixed; dispatch-seam regression tests; no fail-before shown | First run: fixed with fail-before/pass-after, **but shipped a `/helth` compatibility alias plus a test enshrining it** (see below). After the accident rule: 2/2 clean — typo retired, dispatch-seam regression test, fail-before captured, honest sandbox gap named |
+| Checkout resilience under deadline pressure (rates outage) | Last-known-good cache, refused to invent rates, cold-start fails, limitation disclosed | Same design **plus** explicit route-level counterfactual (500 before / 200 after) and degraded-state warning | Same design plus route-level counterfactual, fail-before confirmed, cold-start coverage, stale-rate policy named as an open decision |
+| Incident close-out (fixture also used by anti-machinery) | Deleted all investigation machinery, kept 4 decision tests | — | cwp alone: deleted machinery, kept all 4 decision tests **including expiry**, ran the counterfactual against the baseline commit; paired with anti-machinery: same |
+
+The honest baseline reading stands and deepens the v2 RED finding: gpt-5.6-sol without any
+skill refused to invent exchange rates under pressure and performed a correct machinery
+close-out. The measured deltas that remain are the counterfactual (fail-before/pass-after
+reported as evidence), degradation surfaced as a named decision, and the accident rule
+below. Everything the deleted profiles encoded beyond that was performed by the no-skill
+control.
+
+### RED→GREEN on the v3 draft: the compatibility-alias failure
+
+The draft agent first decided correctly ("retiring the undocumented misspelling rather than
+making it a permanent alias"), then reversed itself during diff review: "repository evidence
+cannot tell us whether any external probe adapted to the already-deployed `/helth` path.
+Removing it would create an unnecessary breaking change" — and shipped the alias plus a test
+asserting the typo stays. Neither the no-skill control nor v2 did this. The v3 rule
+"Accidental behaviour is not a contract … 'someone may depend on it' names no consumer"
+was added against this verbatim rationalization; both re-runs then retired the typo cleanly.
+
+### Session-trace analysis (activation in the field)
+
+An exhaustive grep over ~3,349 Codex session transcripts (2026-05 → 2026-08-19): 1,902
+sessions mention `change-with-proof` (588 with genuine engagement beyond the catalog line),
+946 mention the pre-rename `agent-systems`; 452 sessions use the skill's distinctive
+"counterfactual" vocabulary; one verified case of the skill changing a shipped test's
+content (a bidirectional registry-equality assertion added, citing the skill and the
+causal-debugging profile — content retained in the v3 core). No clear case was found of the
+skill being relevant and silently skipped, and no clean case of it inflating a trivial task;
+both are sampled, not exhaustive, findings. Consumer models: gpt-5.6-sol/luna/terra
+dominate, gpt-5.5 only in pre-rename sessions.

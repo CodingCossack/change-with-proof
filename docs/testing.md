@@ -208,3 +208,13 @@ causal-debugging profile — content retained in the v3 core). No clear case was
 skill being relevant and silently skipped, and no clean case of it inflating a trivial task;
 both are sampled, not exhaustive, findings. Consumer models: gpt-5.6-sol/luna/terra
 dominate, gpt-5.5 only in pre-rename sessions.
+
+### Final-wording confirmation runs
+
+- Both skills, final wording, incident close-out fixture: all machinery deleted, every gate
+  decision rule kept its proof (expiry included), and the retained test was shown to fail
+  against the pre-fix baseline commit.
+- Cross-model check (Claude, Fable 5) on the route-typo fixture with the final skill: typo
+  retired with no compatibility alias, regression test at the real HTTP dispatch seam,
+  explicit fail-before/pass-after counterfactual, environment gap flagged rather than folded
+  into "done".

@@ -4,14 +4,16 @@
 
 ### Changed
 
+- Rename the public repository from `agent-systems` to `change-with-proof` and update active
+  installation paths and discovery copy. GitHub redirects the previous repository URL.
+- Document the optional `anti-machinery` companion skill and its responsibility boundary.
 - Enable implicit invocation after the v2 trigger battery achieved 30/30 intended triggers
   and 0/30 near-miss triggers.
 
 ## 2.0.0 — 2026-07-13
 
 Breaking rewrite. The skill `agent-systems` is renamed **`change-with-proof`**; the payload
-moved from `skills/agent-systems/` to `skills/change-with-proof/`. The GitHub repository
-keeps its original name for now (renaming it is an optional follow-up; GitHub redirects).
+moved from `skills/agent-systems/` to `skills/change-with-proof/`.
 
 ### Changed
 

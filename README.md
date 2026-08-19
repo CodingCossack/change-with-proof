@@ -1,30 +1,30 @@
 # Change with Proof
 
-[![Validate](https://github.com/CodingCossack/agent-systems/actions/workflows/validate.yml/badge.svg)](https://github.com/CodingCossack/agent-systems/actions/workflows/validate.yml)
+[![Validate](https://github.com/CodingCossack/change-with-proof/actions/workflows/validate.yml/badge.svg)](https://github.com/CodingCossack/change-with-proof/actions/workflows/validate.yml)
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-111827)](https://agentskills.io/)
 [![MIT License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
-An agent-agnostic software engineering skill with one job: complete or review a non-trivial
-change without letting compatibility, safety, or completion claims outrun evidence.
+An agent-agnostic software engineering skill for implementation, debugging, refactoring,
+testing, migration, and code review. It completes or reviews a non-trivial change without
+letting compatibility, safety, or completion claims outrun evidence.
 
 One core control loop (change contract → risk profiles → proof portfolio → execution →
 completion gate) plus six composable risk profiles that are read only when their trigger
-matches. This is v2, a breaking rewrite of the skill previously named `agent-systems` —
-see [CHANGELOG.md](CHANGELOG.md) and [docs/design-rationale.md](docs/design-rationale.md).
-The GitHub repository keeps its original name; the installed skill is `change-with-proof`.
+matches. This is v2, a breaking rewrite of the skill previously named `agent-systems`.
+See [CHANGELOG.md](CHANGELOG.md) and [docs/design-rationale.md](docs/design-rationale.md).
 
 ## Install
 
 Install globally with the open [`skills`](https://github.com/vercel-labs/skills) CLI:
 
 ```sh
-npx skills add CodingCossack/agent-systems -g -y
+npx skills add CodingCossack/change-with-proof -g -y
 ```
 
 Install for selected agents:
 
 ```sh
-npx skills add CodingCossack/agent-systems -g -y \
+npx skills add CodingCossack/change-with-proof -g -y \
   -a codex -a claude-code -a gemini-cli -a opencode
 ```
 
@@ -35,7 +35,7 @@ other compatible coding agents.
 ### Codex native installer
 
 ```text
-$skill-installer install https://github.com/CodingCossack/agent-systems/tree/main/skills/change-with-proof
+$skill-installer install https://github.com/CodingCossack/change-with-proof/tree/main/skills/change-with-proof
 ```
 
 ### Manual installation
@@ -43,10 +43,10 @@ $skill-installer install https://github.com/CodingCossack/agent-systems/tree/mai
 Keep a Git checkout outside the agent roots and link the actual skill directory:
 
 ```sh
-git clone https://github.com/CodingCossack/agent-systems.git \
-  ~/.local/share/agent-skills/agent-systems
+git clone https://github.com/CodingCossack/change-with-proof.git \
+  ~/.local/share/agent-skills/change-with-proof
 mkdir -p ~/.agents/skills
-ln -s ~/.local/share/agent-skills/agent-systems/skills/change-with-proof \
+ln -s ~/.local/share/agent-skills/change-with-proof/skills/change-with-proof \
   ~/.agents/skills/change-with-proof
 ```
 
@@ -61,11 +61,18 @@ npx skills update change-with-proof -g -y
 For a Git installation:
 
 ```sh
-git -C ~/.local/share/agent-skills/agent-systems pull --ff-only
+git -C ~/.local/share/agent-skills/change-with-proof pull --ff-only
 ```
 
 If updating across the v1→v2 rename, remove the old `agent-systems` links and re-link
 `skills/change-with-proof` as shown above.
+
+## Companion skill
+
+[`anti-machinery`](https://github.com/CodingCossack/anti-machinery) governs what supporting
+apparatus may remain after a task closes. The skills are independent, but work together:
+`change-with-proof` owns contracts and evidence; `anti-machinery` owns the carrying cost of
+tests, scripts, flags, adapters, reports, and other supporting machinery.
 
 ## What it does
 

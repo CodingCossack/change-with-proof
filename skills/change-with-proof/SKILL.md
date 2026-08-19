@@ -13,6 +13,10 @@ When a more specialised skill is active for part of the work (a dedicated securi
 visual design, prompt writing), let it own that part; use this skill for the engineering
 control loop around it.
 
+When `anti-machinery` is available, use it alongside this skill: this skill owns contracts and
+evidence; `anti-machinery` governs the creation, retention, and retirement of supporting
+machinery.
+
 Trivial, low-risk changes: follow repo conventions, report evidence, and skip the rest of
 this file.
 

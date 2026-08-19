@@ -49,8 +49,13 @@ grep -Fq 'allow_implicit_invocation: true' skills/change-with-proof/agents/opena
 
 grep -Fq 'skills/change-with-proof' README.md \
   || fail 'README must document the skills/change-with-proof payload path'
-grep -Fq 'CodingCossack/agent-systems' README.md \
+grep -Fq 'CodingCossack/change-with-proof' README.md \
   || fail 'README must document the install source repo'
+
+if git grep -n 'CodingCossack/agent-systems' -- ':!CHANGELOG.md' ':!docs/testing.md' ':!scripts/validate.sh' >/dev/null 2>&1; then
+  git grep -n 'CodingCossack/agent-systems' -- ':!CHANGELOG.md' ':!docs/testing.md' ':!scripts/validate.sh' >&2 || true
+  fail 'stale repository URL found'
+fi
 
 [[ -z "$(git ls-files -s | awk '$1 == "120000"')" ]] \
   || fail 'tracked symlinks are not allowed'

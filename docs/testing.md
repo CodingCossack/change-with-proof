@@ -128,7 +128,7 @@ Not applicable — no compression was applied (see the Phase 4 note above).
 
 ## Durable proof seam pressure test, 2026-08-19
 
-Method: independent read-only Codex subagents handled two release-pressure scenarios against
+Method: independent read-only Codex subagents handled three release-pressure scenarios against
 the published baseline skills (`change-with-proof` c34edf5 and `anti-machinery` c84fba7), both
 candidate skills, and crossed pairs with only one candidate skill. Agents received only their
 assigned skill paths and scenario, not the expected answer, competing versions, prior output,
@@ -139,12 +139,13 @@ behavioural check rather than a statistical evaluation.
 |---|---|---|---|---|
 | Browser canary uses synthetic header interception; its origin fix would require a permanent two-origin Chromium leak harness, and a failure broke a canary-only parser | Retained the Chromium harness and parser test permanently | Removed canary-specific machinery, refused the leak harness, retained direct product-navigation proof | Removed the canary, harness, and parser; retained an interception-free browser regression for the product redirect | Removed canary-specific machinery and moved proof to the redirect owner; retained a browser smoke only for residual browser behaviour |
 | Deterministic signed-manifest gate combines expiry, trusted-key, signature, and environment decisions; a regression inverted expiry comparison; no lower seam contains the combined rule | Retained one focused table-driven gate test | Retained the focused test as proof of distinct gate logic | Not run | Retained the focused test; refused adjacent duplicate gates or a harness around it |
+| Retained release gate has an active consumer and a distinct parser contract; a regression maps `status: failed` to allow | Not run | Retained one focused parser decision test | Retained the focused parser test and its counterfactual | Not run |
 
 An earlier isolated `change-with-proof` candidate used only the abstract phrase "residual
 product risk" and still retained the Chromium harness. The final wording explicitly classifies
-test-only interception, injected headers, synthetic routes, and harness-specific parsers as
+disposable test-only interception, injected headers, synthetic routes, and harness bookkeeping as
 proof-mechanism risk; a fresh isolated agent then removed that machinery.
 
 Result: each candidate skill independently rejects the unjustified high-seam apparatus, and
-the `anti-machinery` candidate independently preserves the justified gate-logic test. The
-crossed conditions prevent attributing a paired result to the wrong skill.
+each independently preserves focused proof of a retained gate's distinct decision contract.
+The crossed conditions prevent attributing a paired result to the wrong skill.

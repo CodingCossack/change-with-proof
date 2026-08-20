@@ -2,7 +2,7 @@
 
 Small corrections (typos, broken links, formatting) can go directly to a pull request.
 
-A material change to instructions, triggers, or profiles must:
+A material change to instructions or triggers must:
 
 1. name the failure mode it addresses — what an agent does wrong without it;
 2. add or update a scenario or trigger case in `docs/testing.md` that distinguishes the
@@ -13,8 +13,8 @@ Keep contributions:
 
 - agent-agnostic: no harness-specific tool names, repository-specific policies, or private
   paths;
-- single-sourced: control-loop rules live in `SKILL.md` once; profiles add only obligations
-  for their risk class and follow the fixed section contract (Trigger / Additional
-  obligations / Characteristic failure modes / Minimum evidence / Exit criteria);
+- single-sourced: every rule lives in `SKILL.md` exactly once;
+- evidence-bound: a rule that no observed failure or measured delta justifies does not go
+  in, however plausible (see docs/design-rationale.md);
 - positive: define target behaviour connected to an observable risk, contract, or proof seam
   rather than generic prohibitions.

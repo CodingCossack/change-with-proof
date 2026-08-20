@@ -4,14 +4,24 @@
 [![Agent Skill](https://img.shields.io/badge/Agent%20Skill-compatible-111827)](https://agentskills.io/)
 [![MIT License](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 
-An agent-agnostic software engineering skill for implementation, debugging, refactoring,
-testing, migration, and code review. It completes or reviews a non-trivial change without
-letting compatibility, safety, or completion claims outrun evidence.
+An agent skill that stops a coding agent's claims from outrunning its evidence when it
+changes software that already has behaviour worth preserving.
 
-One core control loop (change contract → risk profiles → proof portfolio → execution →
-completion gate) plus six composable risk profiles that are read only when their trigger
-matches. This is v2, a breaking rewrite of the skill previously named `agent-systems`.
-See [CHANGELOG.md](CHANGELOG.md) and [docs/design-rationale.md](docs/design-rationale.md).
+Capable agents already fix most bugs. What they still get wrong, under pressure, are a
+handful of judgement calls around the fix:
+
+- **"Fixed"** without a regression test at the seam that actually missed the bug, or
+  without showing the same check failing before the fix and passing after it.
+- **"Backwards compatible"** by quietly enshrining an accident — a typo route, an
+  unintended fallback — behind a speculative "someone may depend on it".
+- **"Resilient"** by silently changing business behaviour: substituted prices or rates,
+  skipped writes, placeholder data shipped as a default instead of surfaced as a decision.
+- **"Done"** on evidence of the wrong scope: a typecheck offered as proof of a browser
+  flow, a mocked-helper test as proof of routing, "no grep hits" as proof of no consumers.
+
+The skill is one short file (~620 words) that makes those calls explicit: decide each
+touched behaviour's contract before editing, prove each changed risk at the seam that
+carries it, and gate the claim of done on matching-scope evidence or a named gap.
 
 ## Install
 
@@ -64,80 +74,45 @@ For a Git installation:
 git -C ~/.local/share/agent-skills/change-with-proof pull --ff-only
 ```
 
-If updating across the v1→v2 rename, remove the old `agent-systems` links and re-link
-`skills/change-with-proof` as shown above.
-
-## Companion skill
-
-[`anti-machinery`](https://github.com/CodingCossack/anti-machinery) governs what supporting
-apparatus may remain after a task closes. The skills are independent, but work together:
-`change-with-proof` owns contracts and evidence; `anti-machinery` owns the carrying cost of
-tests, scripts, flags, adapters, reports, and other supporting machinery.
-
-## What it does
-
-The core `SKILL.md` owns the whole loop and is the only always-loaded file:
-
-1. **Change contract** — classify what the change preserves, changes, migrates, or retires;
-   how strong each contract is and who consumes it; how reversible the step is.
-2. **Risk profiles** — read every profile whose trigger matches, none otherwise:
-
-| Trigger | Profile |
-|---|---|
-| Bug, failing or flaky test, regression | `causal-debugging` |
-| Changing/migrating/retiring a hard contract | `contract-evolution` |
-| Identity, permissions, tenancy, secrets, untrusted input, uploads, routing | `trust-boundaries` |
-| Persistence, retries, webhooks, payments, queues, caches | `stateful-integrations` |
-| Rendering, copy, notifications, exports, user-facing output | `user-visible-surfaces` |
-| Deletion, replacement, legacy removal | `replacement-closure` |
-
-3. **Proof portfolio** — the smallest set of evidence that covers every material changed
-   risk, each item chosen at the lowest seam that still contains the real risk.
-4. **Execution** — vertical slices; one durable state block for long or resumed work.
-5. **Completion gate** — diff locality, claim/evidence/gap matching, one compact report.
-
-The central rule is unchanged from v1: a passing typecheck does not prove a browser flow, a
-unit test does not prove routing, and a grep result is not deletion authority.
+If updating from v2, note that the `profiles/` directory no longer exists; a plain
+`git pull` handles this, but copies made by hand should be replaced whole.
 
 ## Use
 
-Explicit invocation:
+The frontmatter description routes the skill automatically on harnesses with implicit
+skill invocation (it fires on changes to existing behaviour and stays out of Q&A,
+greenfield scaffolding, prompt writing, security audits, and visual design). Explicit
+invocation also works:
 
 ```text
 Use $change-with-proof to debug this routing regression and prove the fix at the real failure seam.
 ```
 
-```text
-Use $change-with-proof to migrate this schema without breaking existing rows, and report the evidence.
-```
-
 Repository and harness instructions remain authoritative. If a repository has `AGENTS.md`,
 `CLAUDE.md`, CI rules, or local conventions, the skill operates within them.
 
-Implicit invocation is enabled in `agents/openai.yaml` after the v2 trigger battery achieved
-30/30 intended triggers and 0/30 near-miss triggers. On harnesses that route purely by
-description (for example Claude Code), the frontmatter description carries the same explicit
-"Do not use for" scope.
+## Companion skill
+
+[`anti-machinery`](https://github.com/CodingCossack/anti-machinery) governs what supporting
+apparatus — tests, harnesses, flags, scripts — may remain once a task closes. The skills are
+independent: `change-with-proof` decides what must change and what evidence proves it;
+`anti-machinery` decides what may still exist afterwards.
 
 ## Testing
 
-Changes to the skill's behaviour are gated by subagent-based RED/GREEN pressure scenarios and
-trigger micro-tests, recorded in [docs/testing.md](docs/testing.md). Structural checks run in
-CI via `./scripts/validate.sh`.
+Changes to the skill's behaviour are gated by pressure scenarios run against real coding
+agents on fixture repositories, with no-skill and previous-version controls, plus trigger
+micro-tests for the activation description. Results are recorded in
+[docs/testing.md](docs/testing.md); design decisions and their evidence live in
+[docs/design-rationale.md](docs/design-rationale.md). Structural checks run in CI via
+`./scripts/validate.sh`.
 
 ## Structure
 
 ```text
 skills/change-with-proof/
 ├── SKILL.md
-├── agents/openai.yaml
-└── profiles/
-    ├── causal-debugging.md
-    ├── contract-evolution.md
-    ├── trust-boundaries.md
-    ├── stateful-integrations.md
-    ├── user-visible-surfaces.md
-    └── replacement-closure.md
+└── agents/openai.yaml
 ```
 
 ## Contributing

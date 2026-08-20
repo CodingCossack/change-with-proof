@@ -18,23 +18,18 @@ required=(
   .github/workflows/validate.yml
   skills/change-with-proof/SKILL.md
   skills/change-with-proof/agents/openai.yaml
-  skills/change-with-proof/profiles/causal-debugging.md
-  skills/change-with-proof/profiles/contract-evolution.md
-  skills/change-with-proof/profiles/trust-boundaries.md
-  skills/change-with-proof/profiles/stateful-integrations.md
-  skills/change-with-proof/profiles/user-visible-surfaces.md
-  skills/change-with-proof/profiles/replacement-closure.md
 )
 for f in "${required[@]}"; do
   [[ -f "$f" ]] || fail "missing required file: $f"
 done
 
-# v1 leftovers must not survive the migration
+# v1/v2 leftovers must not survive the migrations
 banned=(
   skills/agent-systems
   skills/change-with-proof/references
   skills/change-with-proof/scripts
   skills/change-with-proof/workflows
+  skills/change-with-proof/profiles
 )
 for p in "${banned[@]}"; do
   [[ ! -e "$p" ]] || fail "v1 leftover present: $p"

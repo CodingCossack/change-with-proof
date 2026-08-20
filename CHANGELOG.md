@@ -1,14 +1,45 @@
 # Changelog
 
-## Unreleased
+## 3.0.0 — 2026-08-19
+
+Breaking rewrite: the skill is a single ~620-word `SKILL.md`. Total payload drops ~84%
+(from ~3,450 words across SKILL.md plus six conditional profiles to one file).
 
 ### Changed
 
+- The core is reduced to the rules with direct behavioural evidence: contract disposition
+  with an explicit "accidental behaviour is not a contract" negation; no silent business-
+  behaviour changes (degradation is a surfaced decision); inherited summaries re-verified;
+  proof at the risk seam with the bugfix counterfactual; proof-apparatus proportionality;
+  claim-scope/evidence-scope matching at completion; the compact final report.
+- The activation description leads with "changing software whose existing behaviour
+  matters", keeps the measured 30/30 positive recall, and excludes "visual design and
+  restyling work, however large" — the one false fire observed in the v3 trigger battery
+  under both the v2 and draft v3 descriptions (3/3 reps each; 0/3 after the exclusion).
 - Rename the public repository from `agent-systems` to `change-with-proof` and update active
   installation paths and discovery copy. GitHub redirects the previous repository URL.
 - Document the optional `anti-machinery` companion skill and its responsibility boundary.
 - Enable implicit invocation after the v2 trigger battery achieved 30/30 intended triggers
   and 0/30 near-miss triggers.
+
+### Added
+
+- "Accidental behaviour is not a contract": in the v3 battery a draft-skill agent shipped a
+  compatibility alias for a typo route on "someone may have adapted to it" reasoning; this
+  rule removed the behaviour in re-runs (see docs/testing.md, 2026-08-19 v3 battery).
+
+### Removed
+
+- `profiles/` (causal-debugging, contract-evolution, trust-boundaries,
+  stateful-integrations, user-visible-surfaces, replacement-closure — ~2,330 words of
+  conditional payload). The v3 baseline on gpt-5.6-sol showed no-skill controls already
+  performing the checklist behaviours these encoded; the two profile rules with measured
+  deltas (the root-cause counterfactual gate and "degradation is a decision") moved into
+  the core. See docs/design-rationale.md, "Why the profiles were deleted".
+- The risk-profile trigger table, the proof-seam taxonomy table, the vertical-slice
+  execution section, and the durable state block. The state block's operative rule
+  (re-verify inherited summaries) is one line in the core; the rest duplicated current
+  model competence or harness behaviour.
 
 ## 2.0.0 — 2026-07-13
 

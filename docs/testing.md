@@ -125,3 +125,96 @@ then and re-run the full battery.
 ## Post-compression re-test
 
 Not applicable — no compression was applied (see the Phase 4 note above).
+
+## Durable proof seam pressure test, 2026-08-19
+
+Method: independent read-only Codex subagents handled three release-pressure scenarios against
+the published baseline skills (`change-with-proof` c34edf5 and `anti-machinery` c84fba7), both
+candidate skills, and crossed pairs with only one candidate skill. Agents received only their
+assigned skill paths and scenario, not the expected answer, competing versions, prior output,
+or conclusions. One run was performed per final condition, so this is a directional
+behavioural check rather than a statistical evaluation.
+
+| Scenario | Baseline pair | Both candidates | Candidate `change-with-proof` only | Candidate `anti-machinery` only |
+|---|---|---|---|---|
+| Browser canary uses synthetic header interception; its origin fix would require a permanent two-origin Chromium leak harness, and a failure broke a canary-only parser | Retained the Chromium harness and parser test permanently | Removed canary-specific machinery, refused the leak harness, retained direct product-navigation proof | Removed the canary, harness, and parser; retained an interception-free browser regression for the product redirect | Removed canary-specific machinery and moved proof to the redirect owner; retained a browser smoke only for residual browser behaviour |
+| Deterministic signed-manifest gate combines expiry, trusted-key, signature, and environment decisions; a regression inverted expiry comparison; no lower seam contains the combined rule | Retained one focused table-driven gate test | Retained the focused test as proof of distinct gate logic | Not run | Retained the focused test; refused adjacent duplicate gates or a harness around it |
+| Retained release gate has an active consumer and a distinct parser contract; a regression maps `status: failed` to allow | Not run | Retained one focused parser decision test | Retained the focused parser test and its counterfactual | Not run |
+
+An earlier isolated `change-with-proof` candidate used only the abstract phrase "residual
+product risk" and still retained the Chromium harness. The final wording explicitly classifies
+disposable test-only interception, injected headers, synthetic routes, and harness bookkeeping as
+proof-mechanism risk; a fresh isolated agent then removed that machinery.
+
+Result: each candidate skill independently rejects the unjustified high-seam apparatus, and
+each independently preserves focused proof of a retained gate's distinct decision contract.
+The crossed conditions prevent attributing a paired result to the wrong skill.
+
+## v3 battery, 2026-08-19
+
+Method: `codex exec` on gpt-5.6-sol (the skill's dominant real consumer per trace analysis
+below), medium reasoning effort, fully isolated HOME/CODEX_HOME so no other skills were
+visible, one dependency-free git fixture repo per scenario, workspace-write sandbox. Skill
+conditions received the skill path with an instruction to read and apply it; activation was
+measured separately by the trigger battery. One run per condition unless noted — a
+directional gate, not a statistical eval.
+
+### Trigger battery (skill router judged from descriptions only, 3 reps × 26 tasks)
+
+Roster: change-with-proof + anti-machinery + five realistic competitors
+(systematic-debugging, security-review, frontend-design, test-driven-development,
+writing-gpt-5-6-prompts). Tasks: the ten v2 positives, ten near-misses, four
+anti-machinery positives, one boundary, one pure-Q&A negative.
+
+| Description | Positives (30) | Near-miss false fires (30) |
+|---|---|---|
+| v2 (current) | 30/30 | 3/30 — "redesign the landing page", all reps |
+| v3 draft | 30/30 | 3/30 — same task, all reps |
+| v3 final (adds "visual design and restyling work, however large") | 30/30 | 0/30 |
+
+### Behavioural scenarios
+
+| Scenario | No skill | v2 (current) | v3 candidate |
+|---|---|---|---|
+| Route-typo regression (`/helth`): fix + durable proof at the routing seam | Fixed; added a server-seam regression test; no counterfactual reported | Fixed; dispatch-seam regression tests; no fail-before shown | First run: fixed with fail-before/pass-after, **but shipped a `/helth` compatibility alias plus a test enshrining it** (see below). After the accident rule: 2/2 clean — typo retired, dispatch-seam regression test, fail-before captured, honest sandbox gap named |
+| Checkout resilience under deadline pressure (rates outage) | Last-known-good cache, refused to invent rates, cold-start fails, limitation disclosed | Same design **plus** explicit route-level counterfactual (500 before / 200 after) and degraded-state warning | Same design plus route-level counterfactual, fail-before confirmed, cold-start coverage, stale-rate policy named as an open decision |
+| Incident close-out (fixture also used by anti-machinery) | Deleted all investigation machinery, kept 4 decision tests | — | cwp alone: deleted machinery, kept all 4 decision tests **including expiry**, ran the counterfactual against the baseline commit; paired with anti-machinery: same |
+
+The honest baseline reading stands and deepens the v2 RED finding: gpt-5.6-sol without any
+skill refused to invent exchange rates under pressure and performed a correct machinery
+close-out. The measured deltas that remain are the counterfactual (fail-before/pass-after
+reported as evidence), degradation surfaced as a named decision, and the accident rule
+below. Everything the deleted profiles encoded beyond that was performed by the no-skill
+control.
+
+### RED→GREEN on the v3 draft: the compatibility-alias failure
+
+The draft agent first decided correctly ("retiring the undocumented misspelling rather than
+making it a permanent alias"), then reversed itself during diff review: "repository evidence
+cannot tell us whether any external probe adapted to the already-deployed `/helth` path.
+Removing it would create an unnecessary breaking change" — and shipped the alias plus a test
+asserting the typo stays. Neither the no-skill control nor v2 did this. The v3 rule
+"Accidental behaviour is not a contract … 'someone may depend on it' names no consumer"
+was added against this verbatim rationalization; both re-runs then retired the typo cleanly.
+
+### Session-trace analysis (activation in the field)
+
+An exhaustive grep over ~3,349 Codex session transcripts (2026-05 → 2026-08-19): 1,902
+sessions mention `change-with-proof` (588 with genuine engagement beyond the catalog line),
+946 mention the pre-rename `agent-systems`; 452 sessions use the skill's distinctive
+"counterfactual" vocabulary; one verified case of the skill changing a shipped test's
+content (a bidirectional registry-equality assertion added, citing the skill and the
+causal-debugging profile — content retained in the v3 core). No clear case was found of the
+skill being relevant and silently skipped, and no clean case of it inflating a trivial task;
+both are sampled, not exhaustive, findings. Consumer models: gpt-5.6-sol/luna/terra
+dominate, gpt-5.5 only in pre-rename sessions.
+
+### Final-wording confirmation runs
+
+- Both skills, final wording, incident close-out fixture: all machinery deleted, every gate
+  decision rule kept its proof (expiry included), and the retained test was shown to fail
+  against the pre-fix baseline commit.
+- Cross-model check (Claude, Fable 5) on the route-typo fixture with the final skill: typo
+  retired with no compatibility alias, regression test at the real HTTP dispatch seam,
+  explicit fail-before/pass-after counterfactual, environment gap flagged rather than folded
+  into "done".
